@@ -11,6 +11,8 @@ pip install -r requirements.txt
 python plqy_explorer.py --file PLQY_absolute_vs_suns.h5
 ```
 
+Or open `explore_plqy.ipynb` in Jupyter for a notebook-based workflow where you can define ROIs by coordinates and see PLQY maps, histograms, and per-pixel power curves.
+
 ## Demo data
 
 A sample dataset (`PLQY_absolute_vs_suns.h5`, 62 MB) of a CsPbBr3 single crystal measured at 20 excitation intensities (1-100 suns) is available as a GitHub Release:
