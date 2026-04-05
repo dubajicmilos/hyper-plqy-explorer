@@ -13,11 +13,11 @@ python plqy_explorer.py --file PLQY_absolute_vs_suns.h5
 
 ## Demo data
 
-A sample dataset (`PLQY_absolute_vs_suns.h5`) of a CsPbBr3 single crystal measured at 20 excitation intensities (1-100 suns) is available on Zenodo:
+A sample dataset (`PLQY_absolute_vs_suns.h5`, 62 MB) of a CsPbBr3 single crystal measured at 20 excitation intensities (1-100 suns) is available as a GitHub Release:
 
-**[DOI link will go here]**
+**[Download from Releases](https://github.com/dubajicmilos/hyper-plqy-explorer/releases/latest)**
 
-Download it, place it in this directory, and run:
+Download the `.h5` file, place it in this directory, and run:
 
 ```bash
 python plqy_explorer.py
