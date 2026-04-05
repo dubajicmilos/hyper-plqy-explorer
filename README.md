@@ -67,6 +67,12 @@ with h5py.File('my_plqy_data.h5', 'w') as f:
 4. **Applied to 20 broadband images** at 1-100 suns (background-subtracted, sub-pixel registered).
 5. **PLQY = emitted photon flux / (absorbed photon flux) x 100%**, assuming 80% absorption.
 
+### Absorption estimate
+
+The 80% absorption assumption was verified using MAPbBr3 single crystal optical constants (Leguy et al.) as a proxy for CsPbBr3. At 405 nm: n = 2.47, k = 0.321, giving an absorption coefficient of ~10^5 cm^-1. For a 220 nm thick crystal with 10% surface reflectance, Beer-Lambert gives 80.0% total absorption of incident light. The 1/e penetration depth at 405 nm is ~100 nm, so essentially all light is absorbed within the crystal.
+
+The PLQY values use the isotropic hemisphere assumption (2*pi solid angle factor). If emission is Lambertian (pi), all PLQY values would be 2x lower.
+
 Full method documentation: see `PLQY_calculation_method.md` in the data repository.
 
 ## Dependencies
