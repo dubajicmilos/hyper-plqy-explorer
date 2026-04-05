@@ -73,7 +73,6 @@ The 80% absorption assumption was verified using MAPbBr3 single crystal optical 
 
 The PLQY values use the isotropic hemisphere assumption (2*pi solid angle factor). If emission is Lambertian (pi), all PLQY values would be 2x lower.
 
-Full method documentation: see `PLQY_calculation_method.md` in the data repository.
 
 ## Dependencies
 
