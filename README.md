@@ -46,19 +46,6 @@ saturation_valid    (n_intensities, H, W)    bool     [optional] pixel validity 
 masks/              group                             [optional] named spatial masks
 ```
 
-### Creating your own data
-
-To use this tool with your own data, create an HDF5 file with at least `PLQY_percent` and `suns` datasets:
-
-```python
-import h5py
-import numpy as np
-
-with h5py.File('my_plqy_data.h5', 'w') as f:
-    f.create_dataset('PLQY_percent', data=plqy_cube)  # shape: (n_powers, H, W)
-    f.create_dataset('suns', data=suns_array)          # shape: (n_powers,)
-```
-
 ## How the PLQY data was generated
 
 1. **Photometric hyperspectral cube** (Photon etc. IMA, 100x objective, 480-570 nm) measured at 27 suns CW 405 nm excitation, calibrated to absolute units: photons/(eV s cm^2 sr).
