@@ -1,8 +1,8 @@
 # HyperPLQY Explorer
 
-Interactive visualization of spatially-resolved, power-dependent photoluminescence quantum yield (PLQY) from hyperspectral imaging data.
+Interactive visualization of spatially resolved, power-dependent photoluminescence quantum yield (PLQY) from hyperspectral imaging data.
 
-Draw rectangular regions of interest on a PLQY map and instantly see how quantum yield varies with excitation intensity for each region.
+Draw rectangular regions of interest (ROIs) on a PLQY map to see how the PLQY of each region varies with excitation intensity.
 
 ## Quick start
 
@@ -11,15 +11,11 @@ pip install -r requirements.txt
 python plqy_explorer.py --file PLQY_absolute_vs_suns.h5
 ```
 
-Or open `explore_plqy.ipynb` in Jupyter for a notebook-based workflow where you can define ROIs by coordinates and see PLQY maps, histograms, and per-pixel power curves.
+Alternatively, open `explore_plqy.ipynb` in Jupyter. The notebook lets you define ROIs by pixel coordinates and plots PLQY maps and histograms, as well as the PLQY of single pixels as a function of excitation intensity.
 
 ## Demo data
 
-A sample dataset (`PLQY_absolute_vs_suns.h5`, 62 MB) of a CsPbBr3 single crystal measured at 20 excitation intensities (1-100 suns) is available as a GitHub Release:
-
-**[Download from Releases](https://github.com/dubajicmilos/hyper-plqy-explorer/releases/latest)**
-
-Download the `.h5` file, place it in this directory, and run:
+A sample dataset (`PLQY_absolute_vs_suns.h5`, 62 MB) from a CsPbBr3 single crystal measured at 20 excitation intensities (1-100 suns) is available from the [latest GitHub release](https://github.com/dubajicmilos/hyper-plqy-explorer/releases/latest). Download the `.h5` file, place it in this directory, and run:
 
 ```bash
 python plqy_explorer.py
@@ -33,7 +29,7 @@ python plqy_explorer.py
 | Slider (bottom) | Changes which excitation intensity is displayed |
 | Clear ROIs button | Removes all rectangles and curves |
 
-Each ROI is color-coded and its mean PLQY vs excitation curve appears on the right panel. The 1-sun point is shown as an open circle (near lasing threshold, potentially unreliable).
+Each ROI is color-coded; its mean PLQY vs excitation intensity curve is plotted in the same color in the right panel. The 1-sun point is shown as an open circle because it is near the lasing threshold and may be unreliable.
 
 ## HDF5 file format
 
@@ -48,17 +44,17 @@ masks/              group                             [optional] named spatial m
 
 ## How the PLQY data was generated
 
-1. **Photometric hyperspectral cube** (Photon etc. IMA, 100x objective, 480-570 nm) measured at 27 suns CW 405 nm excitation, calibrated to absolute units: photons/(eV s cm^2 sr).
-2. **Spectral integration** per pixel over energy, multiplied by 2*pi (hemisphere, isotropic assumption) to get total photon flux.
-3. **Calibration constant** k established by registering the spectrally-integrated map to a broadband image at the same excitation, giving k = photons/(cm^2 per detector count).
-4. **Applied to 20 broadband images** at 1-100 suns (background-subtracted, sub-pixel registered).
-5. **PLQY = emitted photon flux / (absorbed photon flux) x 100%**, assuming 80% absorption.
+1. A photometric hyperspectral cube (Photon etc. IMA, 100x objective, 480-570 nm) was measured at 27 suns under CW 405 nm excitation and calibrated to absolute units of photons/(eV s cm^2 sr).
+2. For each pixel, the spectrum was integrated over energy and multiplied by 2*pi (the solid angle of a hemisphere, assuming isotropic emission) to give the total emitted photon flux.
+3. Registering the spectrally integrated map to a broadband image recorded under the same excitation gave the calibration constant k = photons/(cm^2 per detector count).
+4. The constant k was then applied to 20 broadband images recorded at 1-100 suns, after background subtraction and sub-pixel registration.
+5. The PLQY was calculated as PLQY = emitted photon flux / (absorbed photon flux) x 100%, assuming 80% absorption.
 
 ### Absorption estimate
 
-The 80% absorption assumption was verified using MAPbBr3 single crystal optical constants (Leguy et al.) as a proxy for CsPbBr3. At 405 nm: n = 2.47, k = 0.321, giving an absorption coefficient of ~10^5 cm^-1. For a 220 nm thick crystal with 10% surface reflectance, Beer-Lambert gives 80.0% total absorption of incident light. The 1/e penetration depth at 405 nm is ~100 nm, so essentially all light is absorbed within the crystal.
+The 80% absorption assumption was checked using the optical constants of single-crystal MAPbBr3 (Leguy et al.) as a proxy for CsPbBr3. At 405 nm, the refractive index is n = 2.47 and the extinction coefficient is k = 0.321, which gives an absorption coefficient of ~10^5 cm^-1. For a 220 nm thick crystal with 10% surface reflectance, the Beer-Lambert law gives 80.0% total absorption of the incident light. The 1/e penetration depth at 405 nm is ~100 nm, so most of the light that enters the crystal is absorbed within it.
 
-The PLQY values use the isotropic hemisphere assumption (2*pi solid angle factor). If emission is Lambertian (pi), all PLQY values would be 2x lower.
+The PLQY values use the isotropic hemisphere assumption (2*pi solid angle factor). If the emission is Lambertian (pi), all PLQY values would be a factor of 2 lower.
 
 
 ## Dependencies
